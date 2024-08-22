@@ -1,22 +1,31 @@
 import { LOGO_URL } from "../utils/constants";
+import { useState } from "react";
 const Header = () => {
-    return (
-      <div className="header">
-        <div className="logo-container">
-          <img
-            className="logo"
-            src={LOGO_URL}
-          ></img>
-        </div>
-        <div className="nav-items">
-          <ul>
-            <li>Home</li>
-            <li>About US</li>
-            <li>Contact Us</li>
-            <li>Cart</li>
-          </ul>
-        </div>
+  const [btnNameReact, setBtnNameReact] = useState("Login");
+  return (
+    <div className="header">
+      <div className="logo-container">
+        <img className="logo" src={LOGO_URL}></img>
       </div>
-    );
-  };
-  export default Header;
+      <div className="nav-items">
+        <ul>
+          <li>Home</li>
+          <li>About US</li>
+          <li>Contact Us</li>
+          <li>Cart</li>
+          <button
+            className="login"
+            onClick={() => {
+              btnNameReact == "Login"
+                ? setBtnNameReact("Logout")
+                : setBtnNameReact("Login");
+            }}
+          >
+            {btnNameReact}
+          </button>
+        </ul>
+      </div>
+    </div>
+  );
+};
+export default Header;

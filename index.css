@@ -8,7 +8,7 @@
   width: 100px;
 }
 .nav-items {
-  padding: 0px 20px;
+  padding: 0 20px;
 }
 .nav-items > ul {
   font-size: 24px;
@@ -26,7 +26,7 @@
 .res-card {
   margin: 5px;
   padding: 5px;
-  width: 250px;
+  width: 200px;
 }
 .res-card:hover {
   border: 1px solid black;
@@ -40,7 +40,25 @@
   height: 150px; /* Set a fixed height */
   object-fit: cover; /* Crop the image to fit the container while maintaining aspect ratio */
 }
-.filter-btn{
+.filter-btn {
   margin: 10px;
   cursor: pointer;
+}
+
+.shimmer-container {
+  flex-wrap: wrap;
+  display: flex;
+}
+.shimmer-card {
+  width: 200px;
+  height: 400px;
+  margin: 20px;
+  background-color: #f0f0f0;
+}
+.login {
+  padding: 0 20px;
+  cursor: pointer;
+}
+.filter{
+  display: flex;
 }
