@@ -7,14 +7,12 @@ import useOnlineStatus from "../utils/useOnlineStatus";
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
-
   const [searchText, setSearchtext] = useState("");
 
   useEffect(() => {
     console.log("useEffect Rendered");
     fetchData();
   }, []);
-  console.log("Hello");
 
   const fetchData = async () => {
     const data = await fetch(
@@ -23,18 +21,18 @@ const Body = () => {
     const json = await data.json();
     console.log(json);
     setListOfRestaurants(
-      json?.data?.cards[4]?.card.card.gridElements.infoWithStyle.restaurants
+      json?.data?.cards[1]?.card.card.gridElements.infoWithStyle.restaurants
     );
     setFilteredRestaurant(
-      json?.data?.cards[4]?.card.card.gridElements.infoWithStyle.restaurants
+      json?.data?.cards[1]?.card.card.gridElements.infoWithStyle.restaurants
     );
   };
 
   const onlineStatus = useOnlineStatus();
-  if (onlineStatus==false) {
+  if (onlineStatus == false) {
     return (
       <h1>
-        Looks like You are Offline,Please Check Your Internet Connection..
+        Looks like You are Offline, Please Check Your Internet Connection.
       </h1>
     );
   }
@@ -43,17 +41,18 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter">
-        <div className="search">
+      <div className="flex">
+        <div className="search m-4 p-4">
           <input
             type="input"
-            className="search-box"
+            className="border border-solid border-black"
             value={searchText}
             onChange={(e) => {
               setSearchtext(e.target.value);
             }}
           ></input>
           <button
+            className="px-4 py-2 bg-green-100 m-4 rounded-lg"
             onClick={() => {
               const filteredRestaurant = listOfRestaurants.filter((res) =>
                 res.info.name.toLowerCase().includes(searchText.toLowerCase())
@@ -64,19 +63,22 @@ const Body = () => {
             Search
           </button>
         </div>
-        <button
-          className="filter-btn"
-          onClick={() => {
-            const filteredList = listOfRestaurants.filter(
-              (res) => res.info.avgRating == 4.3
-            );
-            setListOfRestaurants(filteredList);
-          }}
-        >
-          Top Rated Restaurant
-        </button>
+        <div className="px-4 py-2 flex items-center">
+          <button
+            className="px-4 py-2 bg-gray-100 rounded-lg"
+            onClick={() => {
+              const filteredList = listOfRestaurants.filter(
+                (res) => res.info.avgRating === 4
+              );
+              console.log("clicked");
+              setFilteredRestaurant(filteredList); // Update filteredRestaurant instead of listOfRestaurants
+            }}
+          >
+            Top Rated Restaurant
+          </button>
+        </div>
       </div>
-      <div className="res-container">
+      <div className="res-container flex flex-wrap">
         {filteredRestaurant.map((restaurant) => (
           <Link
             key={restaurant.info.id}
